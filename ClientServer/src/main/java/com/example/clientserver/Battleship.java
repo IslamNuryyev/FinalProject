@@ -1,6 +1,8 @@
 package com.example.clientserver;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -19,8 +21,20 @@ public class Battleship extends Application {
         Label homeSign = new Label("Main Menu");
         Button startButt = new Button("Start");
         Button exitButt = new Button("Exit");
-        startButt.setOnAction(event -> primaryStage.setScene(startSc));
-        exitButt.setOnAction(event -> primaryStage.setScene(exitSc));
+
+
+        startButt.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+
+            }
+        });
+        exitButt.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+
+            }
+        });
 
 
 

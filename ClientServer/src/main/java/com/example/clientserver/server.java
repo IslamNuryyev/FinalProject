@@ -6,40 +6,6 @@ import java.util.*;
 
 public class server {
 
-    private static class ClientHandler implements Runnable{
-
-        private final Socket clientSock;
-
-        public ClientHandler(Socket socket){
-            clientSock = socket;
-        }
-
-        public void run(){
-
-            BufferedReader inStream = null;
-            try {
-                inStream = new BufferedReader(new InputStreamReader(clientSock.getInputStream()));
-
-                String message;
-                while ((message = inStream.readLine()) != null){
-                    System.out.println( "Sent from client: " + message);
-                }
-            }
-            catch(IOException e){
-                e.printStackTrace();
-            }
-            finally {
-                try {
-                    inStream.close();
-                    clientSock.close();
-                }
-                catch(IOException e){
-                    e.printStackTrace();
-                }
-            }
-        }
-
-    }
     public static void main(String[] args){
         ServerSocket serve = null;
         try {
@@ -64,6 +30,48 @@ public class server {
         catch(IOException e){
             e.printStackTrace();
         }
+    }
+
+    private static class ClientHandler implements Runnable{
+
+        private int p1loc;
+        private int p2loc;
+        private int p1guess;
+        private int p2guess;
+
+        private final Socket clientSock;
+
+
+        public ClientHandler(Socket socket){
+            clientSock = socket;
+        }
+
+        public void run(){
+
+            BufferedReader inStream = null;
+            try {
+                inStream = new BufferedReader(new InputStreamReader(clientSock.getInputStream()));
+
+                String message;
+                System.out.println("Select Location");
+                while ((message = inStream.readLine()) != null){
+                    System.out.println( "Sent from client: " + message);
+                }
+            }
+            catch(IOException e){
+                e.printStackTrace();
+            }
+            finally {
+                try {
+                    inStream.close();
+                    clientSock.close();
+                }
+                catch(IOException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+
     }
 
 }

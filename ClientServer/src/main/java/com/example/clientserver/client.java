@@ -15,6 +15,7 @@ public class client{
             PrintWriter dout = new PrintWriter(sock.getOutputStream(), true);
             Scanner scanner = new Scanner(System.in);
             String message = "";
+
             while(!message.equals("done")){
                 message = scanner.nextLine();
                 dout.println(message);
