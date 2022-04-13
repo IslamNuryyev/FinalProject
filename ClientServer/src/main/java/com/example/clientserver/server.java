@@ -2,22 +2,8 @@ package com.example.clientserver;
 
 import java.net.*;
 import java.io.*;
-import java.util.*;
 
-public class server {
-    private static int player1location = -1;
-    private static int player2location = -1;
-    private static int player1guess;
-    private static int player2guess;
-
-    private static int max = 9;
-    private static int round = 1;
-    private static char user_inquiry;
-
-    public int getPlayer1location() {
-        return player1location;
-    }
-
+public class Server {
     private static class ClientHandler implements Runnable {
 
         private final Socket clientSock;
@@ -42,49 +28,100 @@ public class server {
 
 
                 while ((message = inStream.readLine()) != null) {
-                    if (player1location == -1) {
-                        player1location = Integer.parseInt(message);
-                        System.out.println( "Player 1 has selected its' location");
+//                    if (State.getPlayer1guess() != -1) {
+//                        State.setPlayer1guess(-1);
+//                    } else if (State.getPlayer2guess() != -1) {
+//                        State.setPlayer2guess(-1);
+//                    }
 
-                    } else if (player2location == -1) {
-                        player2location = Integer.parseInt(message);
+                    if (State.getPlayer1location() == -1) {
+                        State.setPlayer1location(Integer.parseInt(message));
+                        System.out.println( "Player 1 has selected its' location");
+                    } else if (State.getPlayer2location() == -1) {
+                        State.setPlayer2location(Integer.parseInt(message));
                         System.out.println( "Player 2 has selected its' location");
+                    } else if (State.getPlayer1guess() == -1) {
+                       State.setPlayer1guess(Integer.parseInt(message));
+                       System.out.println("player1guess = " + State.getPlayer1guess());
+                    } else if (State.getPlayer2guess() == -1) {
+                        State.setPlayer2guess(Integer.parseInt(message));
+                        System.out.println("player2guess = " + State.getPlayer2guess());
+                    }
+
+                    //                for development
+                    System.out.println( "State.getPlayer1location() = " + State.getPlayer1location());
+                    System.out.println( "State.getPlayer2location() = " + State.getPlayer2location());
+                    //                for development
+
+
+                    if (State.getPlayer2location() == State.getPlayer1guess() && State.getPlayer2location() != -1) {
+                         System.out.println("HIT! Player 1 won.");
+                         break;
+                    }
+
+                    if (State.getPlayer1location() == State.getPlayer2guess() && State.getPlayer1location() != -1) {
+                        System.out.println("HIT! Player 2 won.");
                         break;
                     }
+
+//
+
+
+//                    do {
+//                            while ((message = inStream.readLine()) != null) {
+//                                if (State.getPlayer1guess() == -1) {
+//                                    State.setPlayer1guess(Integer.parseInt(message));
+//                                    System.out.println("player1guess = " + State.getPlayer1guess());
+//
+//                                } else if (State.getPlayer2guess() == -1) {
+//                                    State.setPlayer2guess(Integer.parseInt(message));
+//                                    System.out.println("player2guess = " + State.getPlayer2guess());
+//                                }
+//                            }
+//
+//
+////                        while ((message = inStream.readLine()) != null) {
+////                            State.setPlayer1guess(Integer.parseInt(message));
+////                            System.out.println("player1guess = " + State.getPlayer1guess());
+////                            break;
+////                        }
+////
+////
+////                        while ((message = inStream.readLine()) != null) {
+////                            State.setPlayer2guess(Integer.parseInt(message));
+////                            System.out.println("player2guess = " + State.getPlayer2guess());
+////                            break;
+////                        }
+//
+//
+////                        if (State.getPlayer2location() == State.getPlayer1guess()) {
+////                            System.out.println("HIT! Player 1 won.");
+////                        }
+////
+////                        if (State.getPlayer1location() == State.getPlayer2guess()) {
+////                            System.out.println("HIT! Player 2 won.");
+////                        }
+//                        } while (State.getPlayer2guess() != State.getPlayer1location() || State.getPlayer1guess() != State.getPlayer2location());
+
+
+
+
                 }
 
-//                for development
-                System.out.println( "player1location = " + player1location);
-                System.out.println( "player2location =  " + player2location);
-//                for development
 
-                while ((message = inStream.readLine()) != null) {
-                    player1guess = Integer.parseInt(message);
-                    break;
-                }
+                
+                
 
-                while ((message = inStream.readLine()) != null) {
-                    player2guess = Integer.parseInt(message);
-                    break;
-                }
-
-                while (player1guess != player2guess) {
-
-                }
 
 //                for development
-                System.out.println( "player1guess = " + player1guess);
-                System.out.println( "player2guess =  " + player2guess);
+//                System.out.println( "player1guess = " + player1guess);
+//                System.out.println( "player2guess =  " + player2guess);
 //                for development
 
 
 
-
-
-                System.out.println("Ready to begin ");
-                System.out.println("Round " + round);
-
-
+                // System.out.println("Ready to begin ");
+                // System.out.println("Round " + round);
 
 
 
