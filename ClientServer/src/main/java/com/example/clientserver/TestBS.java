@@ -55,6 +55,7 @@ public class TestBS extends Application {
             if (spot >= 0 && spot <= numPlaces-1) {
                 hit = spot;
                 stage.setScene(fullBoard);
+                stage.setTitle("Battleship Lite");
             }
             input.setText("");
             input.setPromptText("Try Again");
@@ -81,6 +82,7 @@ public class TestBS extends Application {
 
 
         stage.setScene(menu);
+        stage.setTitle("Main Menu");
         stage.show();
     }
 
