@@ -27,7 +27,7 @@ public class Battleship extends Application {
         startButt.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-
+                new TestBS().start(new Stage());
             }
         });
         exitButt.setOnAction(new EventHandler<ActionEvent>() {
