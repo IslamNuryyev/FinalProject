@@ -14,6 +14,10 @@ public class server {
     private static int round = 1;
     private static char user_inquiry;
 
+    public int getPlayer1location() {
+        return player1location;
+    }
+
     private static class ClientHandler implements Runnable {
 
         private final Socket clientSock;
@@ -53,6 +57,28 @@ public class server {
                 System.out.println( "player1location = " + player1location);
                 System.out.println( "player2location =  " + player2location);
 //                for development
+
+                while ((message = inStream.readLine()) != null) {
+                    player1guess = Integer.parseInt(message);
+                    break;
+                }
+
+                while ((message = inStream.readLine()) != null) {
+                    player2guess = Integer.parseInt(message);
+                    break;
+                }
+
+                while (player1guess != player2guess) {
+
+                }
+
+//                for development
+                System.out.println( "player1guess = " + player1guess);
+                System.out.println( "player2guess =  " + player2guess);
+//                for development
+
+
+
 
 
                 System.out.println("Ready to begin ");

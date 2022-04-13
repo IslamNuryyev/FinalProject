@@ -8,7 +8,10 @@ public class client{
 
     public static void main(String args[]){
 
+        server gameState = new server();
+
         try (Socket sock = new Socket("localhost", 3000)){
+            System.out.println("gameState.player1location = " + gameState.getPlayer1location());
             System.out.println("Connected to server...");
             System.out.println("Input \"you are done\" to terminate connection...");
 
@@ -22,11 +25,16 @@ public class client{
             Scanner scanner = new Scanner(System.in);
             String message = "";
 
-            while(!message.equals("you are done")){
-                message = scanner.nextLine();
-                dout.println(message);
-                break;
-            }
+            message = scanner.nextLine();
+            dout.println(message);
+
+            System.out.println("Guess a location of the battleship [0,9]: ");
+
+            message = scanner.nextLine();
+            dout.println(message);
+
+
+
             scanner.close();
         }
         catch(IOException e){
