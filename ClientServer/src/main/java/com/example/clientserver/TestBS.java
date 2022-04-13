@@ -71,11 +71,13 @@ public class TestBS extends Application {
 
         fullBoard = new Scene(board, (numPlaces+1)*placeWidth,boardHeight);
 
-        Label winText = new Label("Good Shit Bro");
-        Button backToMenu = new Button("Play Again");
-        backToMenu.setOnAction(event -> stage.setScene(menu));
-        VBox win = new VBox(winText, backToMenu);
-        winScene = new Scene(win, (numPlaces+1)*placeWidth,boardHeight);
+
+//        // Not Really Needed
+//        Label winText = new Label("Good Shit Bro");
+//        Button backToMenu = new Button("Play Again");
+//        backToMenu.setOnAction(event -> stage.setScene(menu));
+//        VBox win = new VBox(winText, backToMenu);
+//        winScene = new Scene(win, (numPlaces+1)*placeWidth,boardHeight);
 
 
         stage.setScene(menu);
@@ -119,7 +121,7 @@ public class TestBS extends Application {
                 if(Integer.parseInt(ship.getId()) == hit) {
                     // Game is over at this point.
                     ship.setFill(Color.GREEN);
-                    stage.setScene(winScene);
+//                    stage.setScene(winScene);
                 } else {
                     ship.setFill(Color.RED);
                 }
