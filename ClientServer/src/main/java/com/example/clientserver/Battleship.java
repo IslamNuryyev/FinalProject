@@ -36,8 +36,6 @@ public class Battleship extends Application {
             }
         });
 
-
-
         VBox mainMenu = new VBox(20);
         mainMenu.setAlignment(Pos.CENTER);
         mainMenu.getChildren().addAll(homeSign,startButt,exitButt);

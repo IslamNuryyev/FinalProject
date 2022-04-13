@@ -8,15 +8,15 @@ public class client{
 
     public static void main(String args[]){
 
-        try (Socket sock = new Socket("localhost", 6666)){
+        try (Socket sock = new Socket("localhost", 3000)){
             System.out.println("Connected to server...");
-            System.out.println("Input \"done\" to terminate connection...");
+            System.out.println("Input \"you are done\" to terminate connection...");
             //get input from the user to send as a message
             PrintWriter dout = new PrintWriter(sock.getOutputStream(), true);
             Scanner scanner = new Scanner(System.in);
             String message = "";
 
-            while(!message.equals("done")){
+            while(!message.equals("you are done")){
                 message = scanner.nextLine();
                 dout.println(message);
             }
