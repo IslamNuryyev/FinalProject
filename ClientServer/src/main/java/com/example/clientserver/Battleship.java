@@ -15,7 +15,7 @@ import java.io.IOException;
 
 public class Battleship extends Application {
 
-    private Scene menu, startSc, exitSc;
+    private Scene menu, startSc, exitSc; // startSc and exitSc not used (yet)
 
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -28,7 +28,7 @@ public class Battleship extends Application {
             @Override
             public void handle(ActionEvent event) {
                 new TestBS().start(new Stage());
-            }
+            } // opens new window, not sure if this is what we want
         });
         exitButt.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -38,9 +38,9 @@ public class Battleship extends Application {
             }
         });
 
-        VBox mainMenu = new VBox(20);
-        mainMenu.setAlignment(Pos.CENTER);
-        mainMenu.getChildren().addAll(homeSign,startButt,exitButt);
+        VBox mainMenu = new VBox(20); // small main menu size
+        mainMenu.setAlignment(Pos.CENTER); // simplify main menu by centering javafx items
+        mainMenu.getChildren().addAll(homeSign,startButt,exitButt); // include labels and buttons in main menu
         menu = new Scene(mainMenu, 320,240);
         primaryStage.setScene(menu);
         primaryStage.show();

@@ -36,8 +36,8 @@ public class TestBS extends Application {
     public void start(Stage primaryStage) {
         stage = primaryStage;
         Label instructions = new Label("Enter an integer between 0 and "+String.valueOf(numPlaces-1));
-        Button confirm = new Button("Confirm");
-        TextField input = new TextField();
+        Button confirm = new Button("Confirm"); // for confirming battleship location
+        TextField input = new TextField(); // for inputting battleship location
 
 
         input.textProperty().addListener(new ChangeListener<String>() {
@@ -49,12 +49,13 @@ public class TestBS extends Application {
                 }
             }
         });
-        confirm.setOnAction(event -> {
+        confirm.setOnAction(event -> { // find the battleship
             System.out.println(input.getText());
             int spot = Integer.parseInt(input.getText());
             if (spot >= 0 && spot <= numPlaces-1) {
                 hit = spot;
                 stage.setScene(fullBoard);
+                stage.setTitle("Battleship Lite");
             }
             input.setText("");
             input.setPromptText("Try Again");
@@ -62,16 +63,16 @@ public class TestBS extends Application {
 
 
         VBox pickLocation = new VBox(10);
-        pickLocation.getChildren().addAll(instructions,input,confirm);
+        pickLocation.getChildren().addAll(instructions,input,confirm); // add battleship setup items to VBox (to pick start location)
 
-        menu = new Scene(pickLocation, (numPlaces+1)*placeWidth,boardHeight);
-
-
-        Group board = new Group(buildBoard(),getShips());
-
-        fullBoard = new Scene(board, (numPlaces+1)*placeWidth,boardHeight);
+        menu = new Scene(pickLocation, (numPlaces+1)*placeWidth,boardHeight); // make scene wide enough for game and add pickLocation items
 
 
+        Group board = new Group(buildBoard(),getShips()); // put game board and ship location in same group
+
+        fullBoard = new Scene(board, (numPlaces+1)*placeWidth,boardHeight); // display playable game board
+
+        // can be used later for rematch, quit to main menu, exit to desktop?
 //        // Not Really Needed
 //        Label winText = new Label("Good Shit Bro");
 //        Button backToMenu = new Button("Play Again");
@@ -81,6 +82,7 @@ public class TestBS extends Application {
 
 
         stage.setScene(menu);
+        stage.setTitle("Main Menu");
         stage.show();
     }
 
@@ -106,11 +108,11 @@ public class TestBS extends Application {
         Group ships = new Group();
 
         for (int ii = 1; ii < numPlaces+1; ii++) {
-            Circle ship = new Circle((boardHeight/2)*0.8);
-            ship.setFill(Color.GREY);
-            ship.setCenterX((ii*placeWidth)+placeWidth*0.5);
+            Circle ship = new Circle((boardHeight/2)*0.8); // create clickable ship
+            ship.setFill(Color.GREY); // blank colour to indicate unselected spot during the game
+            ship.setCenterX((ii*placeWidth)+placeWidth*0.5); // place ships in a line along the x-axis
             ship.setCenterY(boardHeight*0.5);
-            ship.setId(String.valueOf(ii-1));
+            ship.setId(String.valueOf(ii-1)); // give ship ID to match ship location
 
             Label placeID = new Label(String.valueOf(ii-1));
             placeID.setLayoutX((ii*placeWidth)+placeWidth*0.1);
