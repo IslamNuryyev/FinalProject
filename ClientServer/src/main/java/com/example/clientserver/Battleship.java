@@ -1,6 +1,7 @@
 package com.example.clientserver;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -32,7 +33,8 @@ public class Battleship extends Application {
         exitButt.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-
+                Platform.exit();
+                System.exit(0);
             }
         });
 
