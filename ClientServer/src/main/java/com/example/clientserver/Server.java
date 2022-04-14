@@ -32,19 +32,14 @@ public class Server {
                         State.setPlayer2guess(Integer.parseInt(message));
                         System.out.println("player2guess = " + State.getPlayer2guess());
                     } else {
-                        System.out.println("IS it player's 1 move? = " + State.getIsPlayer1Move());
                         if (State.getPlayer1guess() != -1 && State.getIsPlayer1Move()) {
                             State.setPlayer1guess(-1);
                             State.setIsPlayer1Move(false);
                             System.out.println("Confirm your guess");
-//                            System.out.println("changed boolean should be false = " + State.getIsPlayer1Move());
-//                            System.out.println("RESET player1guess = " + State.getPlayer1guess());
                         } else if (State.getPlayer2guess() != -1) {
                             State.setPlayer2guess(-1);
-//                            System.out.println("RESET player2guess = " + State.getPlayer2guess());
                             State.setIsPlayer1Move(true);
                             System.out.println("Confirm your guess");
-
                         }
                     }
 
