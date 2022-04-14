@@ -2,6 +2,7 @@ package com.example.clientserver;
 
 import java.net.*;
 import java.io.*;
+import java.util.Scanner;
 
 /**
  * Hosts a game of console Battleship on a Server.
