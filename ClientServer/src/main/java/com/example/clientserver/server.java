@@ -17,23 +17,8 @@ public class Server {
             try {
                 inStream = new BufferedReader(new InputStreamReader(clientSock.getInputStream()));
                 String message;
-//                message = inStream.readLine();
-//                player1location = Integer.parseInt(message);
-//
-//                message = inStream.readLine();
-//                player2location = Integer.parseInt(message);
-//
-//                System.out.println( "player1location = " + player1location);
-//                System.out.println( "player2location =  " + player2location);
-
 
                 while ((message = inStream.readLine()) != null) {
-//                    if (State.getPlayer1guess() != -1) {
-//                        State.setPlayer1guess(-1);
-//                    } else if (State.getPlayer2guess() != -1) {
-//                        State.setPlayer2guess(-1);
-//                    }
-
                     if (State.getPlayer1location() == -1) {
                         State.setPlayer1location(Integer.parseInt(message));
                         System.out.println( "Player 1 has selected its' location");
@@ -51,12 +36,14 @@ public class Server {
                         if (State.getPlayer1guess() != -1 && State.getIsPlayer1Move()) {
                             State.setPlayer1guess(-1);
                             State.setIsPlayer1Move(false);
-                            System.out.println("changed boolean should be false = " + State.getIsPlayer1Move());
-                            System.out.println("RESET player1guess = " + State.getPlayer1guess());
+                            System.out.println("Confirm your guess");
+//                            System.out.println("changed boolean should be false = " + State.getIsPlayer1Move());
+//                            System.out.println("RESET player1guess = " + State.getPlayer1guess());
                         } else if (State.getPlayer2guess() != -1) {
                             State.setPlayer2guess(-1);
-                            System.out.println("RESET player2guess = " + State.getPlayer2guess());
+//                            System.out.println("RESET player2guess = " + State.getPlayer2guess());
                             State.setIsPlayer1Move(true);
+                            System.out.println("Confirm your guess");
 
                         }
                     }
@@ -73,7 +60,7 @@ public class Server {
                     }
 
                 }
-                
+
 
             }
             catch(IOException e){
