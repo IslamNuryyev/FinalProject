@@ -10,6 +10,13 @@ public class Server {
     /**
      * Reads Client inputs and handles game data.
      */
+
+    //
+    static Scanner scanner = new Scanner(System.in);
+    static PrintStream standard = System.out;
+    static PrintStream out;
+    //
+
     private static class ClientHandler implements Runnable {
 
         private final Socket clientSock;
@@ -57,12 +64,22 @@ public class Server {
 
 
                     if (State.getPlayer2location() == State.getPlayer1guess() && State.getPlayer2location() != -1) {
-                         System.out.println("HIT! Player 1 won.");
-                         break;
+                        //
+                        System.out.println("HIT! Player 1 won.");
+                        out.close();
+                        System.setOut(standard);
+                        System.out.println("HIT! Player 1 won.");
+                        //
+                        break;
                     }
 
                     if (State.getPlayer1location() == State.getPlayer2guess() && State.getPlayer1location() != -1) {
+                        //
                         System.out.println("HIT! Player 2 won.");
+                        out.close();
+                        System.setOut(standard);
+                        System.out.println("HIT! Player 2 won.");//
+                        //
                         break;
                     }
 
@@ -91,13 +108,26 @@ public class Server {
     public static void main(String[] args){
         ServerSocket serve = null;
 
+        //
+        System.out.print("Enter new Game Log file name: ");
+        String fileName = scanner.nextLine();
+        //
+
         try {
             serve = new ServerSocket(3000); //0 -> lets your OS select a port; port > 1024
             serve.setReuseAddress(true);
+
+            //
+            out = new PrintStream(new FileOutputStream(fileName+".txt"));
+            //
+
             System.out.println("Starting server...");
             System.out.println("Waiting for client connection...");
 
             while(true){
+                //
+                System.setOut(out);
+                //
                 Socket sock = serve.accept();
                 System.out.println("Client is connected " + sock.getInetAddress().getHostAddress()); //this will display the host address of client
                 ClientHandler client = new ClientHandler(sock);
