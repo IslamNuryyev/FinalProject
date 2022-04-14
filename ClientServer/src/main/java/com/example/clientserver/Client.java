@@ -4,6 +4,10 @@ import java.net.*;
 import java.io.*;
 import java.util.*;
 
+/**
+ * Connects a Client to a Server to play a game of Battleship
+ * The client requires a running Server on localhost to work.
+ */
 public class Client {
     public static void main(String args[]) {
        

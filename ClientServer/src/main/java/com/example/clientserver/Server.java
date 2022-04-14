@@ -3,15 +3,27 @@ package com.example.clientserver;
 import java.net.*;
 import java.io.*;
 
+/**
+ * Hosts a game of console Battleship on a Server.
+ */
 public class Server {
+    /**
+     * Reads Client inputs and handles game data.
+     */
     private static class ClientHandler implements Runnable {
 
         private final Socket clientSock;
-
+        /**
+         * Creates socket for connecting clients
+         * @param socket client location
+         */
         public ClientHandler(Socket socket){
             clientSock = socket;
         }
 
+        /**
+         * Takes client inputs and manipulates the Battleship game.
+         */
         public void run(){
             BufferedReader inStream = null;
             try {
@@ -71,6 +83,11 @@ public class Server {
         }
     }
 
+    /**
+     * Starts up Server on localhost
+     * Function is always looking for new clients, meaning more than the two clients can
+     * connect but the game will not accommodate more than two clients
+     */
     public static void main(String[] args){
         ServerSocket serve = null;
 

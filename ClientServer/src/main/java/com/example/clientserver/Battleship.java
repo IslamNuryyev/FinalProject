@@ -13,10 +13,18 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Initiates a game of Battleship in JavaFX
+ */
 public class Battleship extends Application {
 
     private Scene menu, startSc, exitSc; // startSc and exitSc not used (yet)
 
+    /**
+     * JavaFX application main menu setup
+     * @param primaryStage application stage
+     * @throws IOException have application continue running even with file input/output errors
+     */
     @Override
     public void start(Stage primaryStage) throws IOException {
         Label homeSign = new Label("Main Menu");
@@ -27,8 +35,8 @@ public class Battleship extends Application {
         startButt.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                new TestBS().start(new Stage());
-            } // opens new window, not sure if this is what we want
+                new TestBS().start(new Stage()); // opens new window with battleship game
+            }
         });
         exitButt.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -46,6 +54,10 @@ public class Battleship extends Application {
         primaryStage.show();
     }
 
+    /**
+     * Launches application
+     * @param args arguments for launching the application
+     */
     public static void main(String[] args) {
         launch(args);
     }

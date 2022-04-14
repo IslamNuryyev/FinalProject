@@ -1,5 +1,8 @@
 package com.example.clientserver;
 
+/**
+ * Used for holding game variables
+ */
 public class State {
     private static int player1location = -1;
     private static int player2location = -1;

@@ -14,7 +14,9 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
-
+/**
+ * Holds game logic and JavaFX for Battleship game
+ */
 public class TestBS extends Application {
     private int numPlaces = 10;
 
