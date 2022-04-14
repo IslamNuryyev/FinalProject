@@ -10,6 +10,18 @@ public class State {
     private static int round = 1;
     private static char user_inquiry;
 
+    private static Boolean isPlayer1Move = true;
+
+
+    public static Boolean getIsPlayer1Move() {
+        return isPlayer1Move;
+    }
+
+    public static void setIsPlayer1Move(Boolean player1Move) {
+        State.isPlayer1Move = player1Move;
+    }
+
+
     public static void setPlayer1location(int player1location) {
         State.player1location = player1location;
     }

@@ -46,12 +46,20 @@ public class Server {
                     } else if (State.getPlayer2guess() == -1) {
                         State.setPlayer2guess(Integer.parseInt(message));
                         System.out.println("player2guess = " + State.getPlayer2guess());
-                    }
+                    } else {
+                        System.out.println("IS it player's 1 move? = " + State.getIsPlayer1Move());
+                        if (State.getPlayer1guess() != -1 && State.getIsPlayer1Move()) {
+                            State.setPlayer1guess(-1);
+                            State.setIsPlayer1Move(false);
+                            System.out.println("changed boolean should be false = " + State.getIsPlayer1Move());
+                            System.out.println("RESET player1guess = " + State.getPlayer1guess());
+                        } else if (State.getPlayer2guess() != -1) {
+                            State.setPlayer2guess(-1);
+                            System.out.println("RESET player2guess = " + State.getPlayer2guess());
+                            State.setIsPlayer1Move(true);
 
-                    //                for development
-                    System.out.println( "State.getPlayer1location() = " + State.getPlayer1location());
-                    System.out.println( "State.getPlayer2location() = " + State.getPlayer2location());
-                    //                for development
+                        }
+                    }
 
 
                     if (State.getPlayer2location() == State.getPlayer1guess() && State.getPlayer2location() != -1) {
@@ -64,66 +72,8 @@ public class Server {
                         break;
                     }
 
-//
-
-
-//                    do {
-//                            while ((message = inStream.readLine()) != null) {
-//                                if (State.getPlayer1guess() == -1) {
-//                                    State.setPlayer1guess(Integer.parseInt(message));
-//                                    System.out.println("player1guess = " + State.getPlayer1guess());
-//
-//                                } else if (State.getPlayer2guess() == -1) {
-//                                    State.setPlayer2guess(Integer.parseInt(message));
-//                                    System.out.println("player2guess = " + State.getPlayer2guess());
-//                                }
-//                            }
-//
-//
-////                        while ((message = inStream.readLine()) != null) {
-////                            State.setPlayer1guess(Integer.parseInt(message));
-////                            System.out.println("player1guess = " + State.getPlayer1guess());
-////                            break;
-////                        }
-////
-////
-////                        while ((message = inStream.readLine()) != null) {
-////                            State.setPlayer2guess(Integer.parseInt(message));
-////                            System.out.println("player2guess = " + State.getPlayer2guess());
-////                            break;
-////                        }
-//
-//
-////                        if (State.getPlayer2location() == State.getPlayer1guess()) {
-////                            System.out.println("HIT! Player 1 won.");
-////                        }
-////
-////                        if (State.getPlayer1location() == State.getPlayer2guess()) {
-////                            System.out.println("HIT! Player 2 won.");
-////                        }
-//                        } while (State.getPlayer2guess() != State.getPlayer1location() || State.getPlayer1guess() != State.getPlayer2location());
-
-
-
-
                 }
-
-
                 
-                
-
-
-//                for development
-//                System.out.println( "player1guess = " + player1guess);
-//                System.out.println( "player2guess =  " + player2guess);
-//                for development
-
-
-
-                // System.out.println("Ready to begin ");
-                // System.out.println("Round " + round);
-
-
 
             }
             catch(IOException e){
