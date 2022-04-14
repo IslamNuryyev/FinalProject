@@ -22,7 +22,8 @@ public class TestBS extends Application {
     private double placeWidth = 100;
     private double boardHeight = 100;
 
-    private int hit = -1;
+    private int p1hit = -1;
+    private int p2hit = -1;
 
     private Scene menu, fullBoard, winScene;
     private Stage stage;
@@ -34,47 +35,69 @@ public class TestBS extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+
         stage = primaryStage;
         Label instructions = new Label("Enter an integer between 0 and "+String.valueOf(numPlaces-1));
         Button confirm = new Button("Confirm"); // for confirming battleship location
-        TextField input = new TextField(); // for inputting battleship location
+        TextField inputp1 = new TextField(); // for inputting battleship location (player 1)
+        TextField inputp2 = new TextField(); // for inputting battleship location (player 2)
+        inputp1.setPromptText("Player 1");
+        inputp2.setPromptText("Player 2");
 
 
-        input.textProperty().addListener(new ChangeListener<String>() {
+        inputp1.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
                                 String newValue) {
                 if (!newValue.matches("\\d*")) {
-                    input.setText(newValue.replaceAll("[^\\d]", ""));
+                    inputp1.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+
+        inputp2.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    inputp2.setText(newValue.replaceAll("[^\\d]", ""));
                 }
             }
         });
         confirm.setOnAction(event -> { // find the battleship
-            System.out.println(input.getText());
-            int spot = Integer.parseInt(input.getText());
-            if (spot >= 0 && spot <= numPlaces-1) {
-                hit = spot;
+//            System.out.println(inputp1.getText());
+            int spot = Integer.parseInt(inputp1.getText());
+            int spotp2 = Integer.parseInt(inputp2.getText());
+            if ((spot >= 0 && spot <= numPlaces-1) && spotp2 >= 0 && spotp2 <= numPlaces-1) {
+//                System.out.println("State.getPlayer1location() = " + State.getPlayer1location());
+//                p1hit = State.getPlayer1location();
+                p1hit = spot;
+                p2hit = spotp2;
                 stage.setScene(fullBoard);
                 stage.setTitle("Battleship Lite");
             }
-            input.setText("");
-            input.setPromptText("Try Again");
+            inputp1.setText("");
+            inputp2.setText("");
+            inputp1.setPromptText("Try Again (player 1)");
+            inputp2.setPromptText("Try Again (player 2)");
         });
 
 
+
+
         VBox pickLocation = new VBox(10);
-        pickLocation.getChildren().addAll(instructions,input,confirm); // add battleship setup items to VBox (to pick start location)
+        pickLocation.getChildren().addAll(instructions,inputp1,inputp2,confirm); // add battleship setup items to VBox (to pick start location)
 
-        menu = new Scene(pickLocation, (numPlaces+1)*placeWidth,boardHeight); // make scene wide enough for game and add pickLocation items
+        menu = new Scene(pickLocation, (numPlaces+1)*placeWidth,boardHeight*3); // make scene wide enough for game and add pickLocation items
 
 
-        Group board = new Group(buildBoard(),getShips()); // put game board and ship location in same group
+        Group board1 = new Group(buildBoard(true),getShips(true),buildBoard(false),getShips(false)); // put game board and ship location in same group
 
-        fullBoard = new Scene(board, (numPlaces+1)*placeWidth,boardHeight); // display playable game board
+        fullBoard = new Scene(board1, (numPlaces+1)*placeWidth,boardHeight*3); // display playable game board
 
         // can be used later for rematch, quit to main menu, exit to desktop?
 //        // Not Really Needed
-//        Label winText = new Label("Good Shit Bro");
+//        Label winText = new Label("Good Sp1hit Bro");
 //        Button backToMenu = new Button("Play Again");
 //        backToMenu.setOnAction(event -> stage.setScene(menu));
 //        VBox win = new VBox(winText, backToMenu);
@@ -86,48 +109,78 @@ public class TestBS extends Application {
         stage.show();
     }
 
-    public Group buildBoard() {
+    public Group buildBoard(boolean p1) {
+        double height;
+        if(p1) {
+            height = 0;
+        } else {
+            height = 2;
+        }
+
         Group startBoard = new Group();
 
         for (int ii = 2; ii < numPlaces+1; ii++) {
             Line newLine = new Line();
             newLine.setStartX(ii*placeWidth);
-            newLine.setStartY(0);
+            newLine.setStartY(0+height*boardHeight);
             newLine.setEndX(ii*placeWidth);
-            newLine.setEndY(0+boardHeight);
+            newLine.setEndY(0+boardHeight+height*boardHeight);
 
             startBoard.getChildren().add(newLine);
-//            System.out.println(hit);
+//            System.out.println(p1hit);
         }
 
 
         return startBoard;
     }
 
-    public Group getShips() {
+    public Group getShips(boolean p1) {
+        double height;
+        if(p1) {
+            height = 0;
+        } else {
+            height = 2;
+        }
+
+
         Group ships = new Group();
 
         for (int ii = 1; ii < numPlaces+1; ii++) {
             Circle ship = new Circle((boardHeight/2)*0.8); // create clickable ship
             ship.setFill(Color.GREY); // blank colour to indicate unselected spot during the game
             ship.setCenterX((ii*placeWidth)+placeWidth*0.5); // place ships in a line along the x-axis
-            ship.setCenterY(boardHeight*0.5);
+            ship.setCenterY(boardHeight*0.5+height*boardHeight);
             ship.setId(String.valueOf(ii-1)); // give ship ID to match ship location
 
             Label placeID = new Label(String.valueOf(ii-1));
             placeID.setLayoutX((ii*placeWidth)+placeWidth*0.1);
-            placeID.setLayoutY(boardHeight*0.1);
+            placeID.setLayoutY(boardHeight*0.1+height*boardHeight);
 
-            ship.setOnMouseClicked(event -> {
-                System.out.println(ship.getId());
-                if(Integer.parseInt(ship.getId()) == hit) {
-                    // Game is over at this point.
-                    ship.setFill(Color.GREEN);
+            if (p1) {
+                ship.setOnMouseClicked(event -> {
+//                System.out.println(ship.getId());
+                    if (Integer.parseInt(ship.getId()) == p2hit) {
+                        // Game is over at this point.
+                        ship.setFill(Color.GREEN);
+                        stage.setTitle("Player 1 Wins!");
 //                    stage.setScene(winScene);
-                } else {
-                    ship.setFill(Color.RED);
-                }
-            });
+                    } else {
+                        ship.setFill(Color.RED);
+                    }
+                });
+            } else {
+                ship.setOnMouseClicked(event -> {
+//                System.out.println(ship.getId());
+                    if (Integer.parseInt(ship.getId()) == p1hit) {
+                        // Game is over at this point.
+                        ship.setFill(Color.GREEN);
+                        stage.setTitle("Player 2 Wins!");
+//                    stage.setScene(winScene);
+                    } else {
+                        ship.setFill(Color.RED);
+                    }
+                });
+            }
 
             ships.getChildren().addAll(ship,placeID);
         }
