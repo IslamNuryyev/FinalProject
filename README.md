@@ -1,9 +1,9 @@
 # FinalProject - Group 32
 ## Members: 
-* Chris Lammers
-* Russell Ngo
-* Islam Nuryev
-* Dane Rosedo
+* Chris Lammers -100790204
+* Russell Ngo - 100791124
+* Islam Nuryev - 100778667
+* Dane Rosedo - 100703194
 
 ## Project information: 
 The project features a linear game of Battleship where two players each assign a position, from 0 to 9, for their ships. The positions are represented by circles and each player tries to guess the location of their opponent's ship. A wrong guess turns the circle red and a correct one turns it green. The game concludes with a player winning and the title of the window displaying a message specifying the winner. 
@@ -13,6 +13,7 @@ The project features a linear game of Battleship where two players each assign a
 Unfortunately, we faced difficulties connecting Server and the UI because the data in State.java was not preserving and could not be accessed from TestBS.java. We will show two ways to run the program instead. One can be played through the console and one with UI.
 
 Console:
+
 1. Clone the repository from github and open the project.
 2. Apply appropriate configurations to make sure the project runs smoothly. In our case, we used Project SDK version 16 on Intellij. We also modified the run configurations for the Client.java class to allow multiple instances.
 3. Start running the Server class first and enter a name for the game log file as prompted. The progress of the game will be printed onto a text file.
