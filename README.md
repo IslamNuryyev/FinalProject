@@ -15,8 +15,11 @@ Unfortunately, we faced difficulties connecting Server and the UI because the da
 Console:
 1. Clone the repository from github and open the project.
 2. Apply appropriate configurations to make sure the project runs smoothly. In our case, we used Project SDK version 16 on Intellij. We also modified the run configurations for the Client.java class to allow multiple instances.
-3. Start running the Server class first and then the Client class twice. Each Client run instance represents a player. Each one will be prompted to select a location from 0-9 to store their ship. The players will then take turns entering and confirming their guesses until someone wins. 
-4. The Server console keeps track of the game progress and displays the message declaring the winner.
+3. Start running the Server class first and enter a name for the game log file as prompted. The progress of the game will be printed onto a text file.
+4. Run the Client class twice. Each Client run instance represents a player and each one will be prompted to select a location from 0-9 to store their ship. The players will then take turns entering and confirming their guesses until someone wins. 
+5. Keep checking the server console after each player confirms their guess to see if they win. Once a player wins, the Server console displays the message declaring the winner.
+6. After a player wins, enter "done" into the both Clients' console to terminate their connections.
+7. A text file containing the progress of the game will be generated.
 
 UI:
 1. Run Battleship and a main menu window will pop up showing options, Start and Exit.
@@ -29,8 +32,5 @@ This page was used as extra reference for the project: https://www.geeksforgeeks
 
 ## Video Demonstration:
 
-### Demo 1 - Console:
-
-### Demo 2 - UI:
 
 
