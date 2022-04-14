@@ -35,6 +35,10 @@ public class TestBS extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        //The plan was to get the data that was inputted from Client.java into the Server and stored in State.java
+        //and use it here in UI. However, for some reason when we access data from State.java it returns default values
+        //and data does not preserve
+        // System.out.println(State.getPlayer1location()); //outputs -1, not the inputted location from a player
 
         stage = primaryStage;
         Label instructions = new Label("Enter an integer between 0 and "+String.valueOf(numPlaces-1));
