@@ -6,10 +6,6 @@ public class State {
     private static int player1guess = -1;
     private static int player2guess = -1;
 
-    private static int max = 9;
-    private static int round = 1;
-    private static char user_inquiry;
-
     private static Boolean isPlayer1Move = true;
 
 
@@ -38,18 +34,6 @@ public class State {
         State.player2guess = player2guess;
     }
 
-    public static void setMax(int max) {
-        State.max = max;
-    }
-
-    public static void setRound(int round) {
-        State.round = round;
-    }
-
-    public static void setUser_inquiry(char user_inquiry) {
-        State.user_inquiry = user_inquiry;
-    }
-
     public static int getPlayer1location() {
         return player1location;
     }
@@ -65,17 +49,4 @@ public class State {
     public static int getPlayer2guess() {
         return player2guess;
     }
-
-    public int getMax() {
-        return max;
-    }
-
-    public int getRound() {
-        return round;
-    }
-
-    public char getUser_inquiry() {
-        return user_inquiry;
-    }
-
 }

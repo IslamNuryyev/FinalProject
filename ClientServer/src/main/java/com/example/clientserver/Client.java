@@ -10,7 +10,7 @@ public class Client {
         try (Socket sock = new Socket("localhost", 3000)){
 
             System.out.println("Connected to server...");
-            System.out.println("Input \"you are done\" to terminate connection...");
+            System.out.println("Input \"done\" to terminate connection...");
 
             System.out.println("----------------------------------");
             System.out.println("Welcome to Battleship Lite!");
@@ -24,48 +24,12 @@ public class Client {
             message = scanner.nextLine();
             dout.println(message);
 
-            while(!message.equals("you are done")){
+            while(!message.equals("done")){
                 System.out.println("Guess a location of the battleship [0,9]: ");
                 message = scanner.nextLine();
                 System.out.println("message = " + message);
                 dout.println(message);
             }
-
-//            System.out.println("Server.getPlayer1location() = " + State.getPlayer1location());
-//
-//            if (State.getPlayer1location() == -1) {
-//                State.setPlayer1location(Integer.parseInt(message));
-//            } else if (State.getPlayer2location() == -1) {
-//                State.setPlayer2location(Integer.parseInt(message));
-//            }
-//
-//            System.out.println("gameState.player1location = " + State.getPlayer1location());
-//            System.out.println("gameState.player2location = " + State.getPlayer2location());
-
-
-
-
-            // do {
-            //     System.out.println("Guess a location of the battleship [0,9]: ");
-
-            //     message = scanner.nextLine();
-            //     dout.println(message);
-
-            //     System.out.println("gameState.getPlayer1guess() = " + Server.getPlayer1guess());
-            //     System.out.println("gameState.getPlayer2location() = " + Server.getPlayer2location());
-
-            //     if (Server.getPlayer2location() == Server.getPlayer1guess()) {
-            //         System.out.println("HIT! Player 1 won.");
-            //         break;
-            //     }
-
-            //     if (Server.getPlayer1location() == Server.getPlayer2guess()) {
-            //         System.out.println("HIT! Player 2 won.");
-            //         break;
-            //     }
-
-            // }  while (Server.getPlayer2guess() != Server.getPlayer1location() || Server.getPlayer2guess() != Server.getPlayer1location());
-
         
             scanner.close();
         }
