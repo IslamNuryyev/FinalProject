@@ -2,7 +2,7 @@
 ## Members: 
 * Chris Lammers -100790204
 * Russell Ngo - 100791124
-* Islam Nuryev - 100778667
+* Islam Nuryyev - 100778667
 * Dane Rosedo - 100703194
 
 ## Project information: 
