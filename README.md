@@ -38,5 +38,6 @@ This page was used as extra reference for the project: https://www.geeksforgeeks
 
 ## Video Demonstration:
 
-
+This video shows a demonstration of the project being played through the console and GUI:
+https://www.youtube.com/watch?v=cWAyy1DrUo4
 
